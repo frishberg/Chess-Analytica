@@ -2,12 +2,12 @@
 
 # -- Project information
 
-project = 'Chess Analytica'
-copyright = '2023, Frishberg'
-author = 'Aron Frishberg'
+project = 'Lumache'
+copyright = '2021, Graziella'
+author = 'Graziella'
 
 release = '0.1'
-version = '1.0.3'
+version = '0.1.0'
 
 # -- General configuration
 
