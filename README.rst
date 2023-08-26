@@ -2,7 +2,7 @@ chess-analytica: making chess analytics easy.
 ========================================
 
 .. image:: https://readthedocs.org/projects/chess-analytica/badge/?version=latest
-    :target: https://python-chess.readthedocs.io/en/latest/
+    :target: https://chess-analytica.readthedocs.io/en/latest/
     :alt: Docs
 
 Introduction
