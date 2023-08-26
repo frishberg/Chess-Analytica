@@ -1,0 +1,3 @@
+- add tests
+- write read me
+- write docs
