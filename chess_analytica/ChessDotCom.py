@@ -1,7 +1,7 @@
 import requests
 import json
 import os
-import Board
+from .Board import Board
 
 def import_json_from_url(url: str) :
     """
@@ -133,9 +133,9 @@ class Profile :
         self.all_games = [] #contains all archived games, stored as Board objects
         self.current_games = [] #contains all current games, stored as Board objects
         for game in self.games_data : #converts all games to Board objects and adds them to the all_games list
-            self.all_games.append(Board.Board(game['pgn']))
+            self.all_games.append(Board(game['pgn']))
         for game in self.current_games : #converts all current games to Board objects and adds them to the current_games list
-            self.current_games.append(Board.Board(game['pgn']))
+            self.current_games.append(Board(game['pgn']))
         self.games = self.all_games #self.games is the list of games that is used for analysis.  By default, it is all of the player's games, but it can be filtered by the filterGameType() method to only contain games of a given type (ex. rapid, bullet, ...)
 
     def filterGameType(self, type: str) :
@@ -432,3 +432,5 @@ class Profile :
         """
         moves, _ = self.findMovesAfterFEN(FEN, white)
         return moves[0]
+    
+profile = Profile("aronfrish", True)
