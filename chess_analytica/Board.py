@@ -32,7 +32,8 @@ def retrieve_info(PGN: str) :
         the UTC end time of the game (ex. 8:36:15)
     link : str
         the link to the game on chess.com
-    length_of_match : int
+    time_length : int
+        the length of the game in seconds
         
     """
     PGN = PGN[PGN.index("Date")+6:]
