@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'Chess Analytica'
+copyright = '2023, Frishberg'
+author = 'Aron Frishberg'
 
 release = '0.1'
 version = '0.1.0'
