@@ -4,4 +4,4 @@ ChessDotCom
 .. autosummary::
    :toctree: generated
 
-   lumache
+   chess-analytica
