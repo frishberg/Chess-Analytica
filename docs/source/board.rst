@@ -1,4 +1,4 @@
-Usage
+Board
 =====
 
 .. _installation:
