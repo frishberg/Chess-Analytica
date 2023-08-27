@@ -1,5 +1,5 @@
-chess-analytica: making chess analytics easy.
-========================================
+chess-analytica: chess analytics made easy
+================================================================================
 
 .. image:: https://readthedocs.org/projects/chess-analytica/badge/?version=latest
     :target: https://chess-analytica.readthedocs.io/en/latest/
@@ -32,3 +32,33 @@ all of a given player's past (or current) games, filter the games down, and then
     #R N B n . B . R
     #https://www.chess.com/game/live/77569257661
 
+Installing
+----------
+
+Download and install the latest release:
+
+::
+
+    pip install chess-analytica
+
+
+`Documentation <https://chess-analytica.readthedocs.io/en/latest/>`__
+---------------------------------------------------------------------------------------------
+* `Examples <https://chess-analytica.readthedocs.io/en/latest/examples.html>`_
+* `ChessDotCom Class <https://chess-analytica.readthedocs.io/en/latest/chessdotcom.html>`_
+* `Board Class <https://chess-analytica.readthedocs.io/en/latest/board.html>`_
+
+Features
+--------
+
+* Scrape all game info from a given player's profile
+
+* Simulate games and analyze them
+
+* Filter games by time control
+
+License
+-------
+
+chess-analytica is licensed under the MIT License.
+Check out ``LICENSE.txt`` for the full text.
