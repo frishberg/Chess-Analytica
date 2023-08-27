@@ -44,7 +44,7 @@ Download and install the latest release:
 
 `Documentation <https://chess-analytica.readthedocs.io/en/latest/>`__
 ---------------------------------------------------------------------------------------------
-* `Examples <https://chess-analytica.readthedocs.io/en/latest/examples.html>`_
+* `Examples <https://chess-analytica.readthedocs.io/en/latest/usage.html>`_
 * `ChessDotCom Class <https://chess-analytica.readthedocs.io/en/latest/chessdotcom.html>`_
 * `Board Class <https://chess-analytica.readthedocs.io/en/latest/board.html>`_
 
