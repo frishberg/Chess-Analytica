@@ -1,4 +1,4 @@
-import requests
+import urllib.request
 import json
 import os
 from .Board import Board
@@ -17,10 +17,9 @@ def import_json_from_url(url: str) :
     dict
         the JSON from the given URL
     """
-    response = requests.get(url)
-    content = response.content.decode("utf-8")
-    content_json = json.loads(content)
-    return content_json
+    with urllib.request.urlopen(url) as url:
+        data = json.loads(url.read().decode())
+        return data
 
 def sortMovesAndFrequencies(moves: list, frequencies: list) :
     """
