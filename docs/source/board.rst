@@ -1,72 +1,56 @@
 Board
-=====
+============
 
-.. _installation:
-
-Installation
+Summary
 ---------------
 
-To use chess-analytica, first install it using pip:
+The Board file of chess-analytica contains the Board class, which 
+is used by the ChessDotCom class to represent a board/chess game.  This class is built off of 
+the chess library, which allowed for the easy implementation of the board and game logic.
 
-.. code-block:: console
+All of the methods in ChessDotCom that involve the board are built off of this class and return objects of the Board class, so 
+methods in the Board class will be needed to interpret results from ChessDotCom.
 
-   pip install chess-analytica
+This board class can also be used on its own, without the ChessDotCom class, to represent a board and game.
 
-Examples
+To import the Board class alone, you can use the following code:
+
+.. code-block:: python
+
+   from chess-analytica import Board
+
+Attributes
+-------------
+WRITE DESCRIPTION.  attributes are for scraping, methods are for analysis.
+
+add attribute listings here
+
+Methods
 ----------------
+Below I've provided all useful methods of the Board class, along with a brief description and example usage of each.  For more information on each method, please refer to the docstrings in the code.
 
-To retrieve all of a player's games, you create an instance of the ``Profile`` class in ChessDotCom.
+Note: There are some methods that I don't include in this list, such as the calculate_time_length method (which is used to calculate the length of chess games), as they are not meant to be used by the user, and are only meant to be used by the other more important methods.
 
-By calling the constructor, it will automatically retrieve all available information about the player (games archive, name, rating, ...).
+__init__(PGN: str)
+--------------------
 
-.. code:: python
+__str__()
+-------------
 
-   from chess_analytica import Board, ChessDotCom
+move()
+----------
 
-   profile = ChessDotCom.Profile("aronfrish", False)
+get_board()
+---------------
 
-   print(len(profiles.games))
+get_FEN()
+------------
 
-   # 846
+has_move()
+------------
 
-The constructor also allows for the option of using a save file or not.  If you set the "import-save" parameter to True, it will attempt to load the profile from a save file.  If the save file does not exist, it will scrape the data and create one.
+reset()
+---------
 
-Because of this implementation, it's recommended that you leave this on True for the most part, unless you need to use data that is fully up to date.  Otherwise, the save file will make the program run a lot quicker, as it won't have to scrape the data each time.
-
-There is also a filter option implemented into this library, that can be used as such:
-
-.. code:: python
-
-   from chess_analytica import Board, ChessDotCom
-
-   profile = ChessDotCom.Profile("aronfrish", False)
-
-   profile.filterGameType("rapid")
-
-   print(len(profile.games))
-
-   # 716
-
-This feature allows for more exact analytics, as you're able to filter out games that you don't want to include in your analysis.  For example, the average accuracy of 
-a blitz game is far lower than the average accuracy of a classical game, so you may want to filter out blitz games if you want to determine the true skill of a player.
-
-This library also includes many analytical methods, such as ``mostCommonMove()`` and ``moveTable()``.  These methods can be used as such:
-
-.. code:: python
-
-   from chess_analytica import Board, ChessDotCom
-
-   profile = ChessDotCom.Profile("aronfrish", False)
-
-   print(profile.mostCommonMove("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", True)) #given this FEN, which is the four knights opening, and setting "white" to True (meaning that we'll be looking at all of the times the given player has been white in this position), it will tell us their most common move
-
-   # c3d5
-
-   print(profile.moveTable("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", True)) #using the same parameters as above, but this produces a visual table containing all of their moves in the given position and their frequencies (in descending order to show most popular first)
-
-   # c3d5: 27
-   # f1d3: 16
-   # f1c4: 15
-   # d2d3: 4
-   # a2a3: 3
-   # d2d4: 2
+more methods to come
+---------------------

@@ -24,7 +24,7 @@ def import_json_from_url(url: str) :
 
 def sortMovesAndFrequencies(moves: list, frequencies: list) :
     """
-    Sorts a list of moves and frequencies (whose indexes correspond) by frequency.  This is used to check the most frequent moves in a game, and is thus used for the moveTable() and mostCommonMove() methods.
+    Sorts a list of moves and frequencies (whose indexes correspond) by frequency.  This is used to check the most frequent moves in a game, and is thus used for the move_table() and most_common_move() methods.
     
     Example: 
     [Move.from_uci('g1f3'), Move.from_uci('d2d4'), Move.from_uci('d1h5')], [158, 26, 27] -> [Move.from_uci('g1f3'), Move.from_uci('d1h5'), Move.from_uci('d2d4')], [158, 27, 26]
@@ -84,11 +84,11 @@ class Profile :
     current_games : list
         the player's current ongoing games, stored as Board objects
     games : list
-        the player's games, stored as Board objects.  This contains a filtered version of the all_games list, filtered by the filterGameType() method.  By default, this list contains all of the player's games, but can be filtered to only contain rapid games, bullet games, etc. to allow for more specific analysis (ex. analyzing only bullet games to see the player's most popular bullet openings)
+        the player's games, stored as Board objects.  This contains a filtered version of the all_games list, filtered by the filter_game_type() method.  By default, this list contains all of the player's games, but can be filtered to only contain rapid games, bullet games, etc. to allow for more specific analysis (ex. analyzing only bullet games to see the player's most popular bullet openings)
     
     Methods
     -------
-    filterGameType(type: str)
+    filter_game_type(type: str)
         filters the games list to only contain games of a given type (ex. "rapid", "bullet", ...), allowing for more specific analysis (ex. analyzing only bullet games to see the player's most popular bullet openings)
     retrieve_player_profile()
         scrapes the chess.com API for the player's profile (which includes avatar url, player_id, url, name, followers, country, joined and some other basic info) and returns it in an accessible JSON format
@@ -104,16 +104,16 @@ class Profile :
         saves the player's profile, stats, current games, and games to a file in the "cache" folder
     load_info()
         loads the player's profile, stats, current games, and games from a file in the "cache" folder.  If the file does not exist, it raises an exception
-    findGamesWithFEN(FEN: str)
-        finds all of the games that contain a given FEN.  This goes through all of the board objects in games (potentially filtered by filterGameType()) and checks if they contain the given FEN using their containsFEN() method.  This method simulates through the entire game and checks if the given FEN matches at any point throughout the game.
-    findGamesWithFENandColor(FEN: str, white: bool)
-        finds all of the games that contain a given FEN and where the player is white (if white bool is True) or black (if white bool is False) using the findGamesWithFEN() method.
-    findMovesAfterFEN(FEN: str, white: bool)
-        goes through all games, where the player is white (if white bool is True) or black (if white bool is False), and finds their most common moves (with frequency) after that FEN.  This method uses the findGamesWithFENandColor() method to find the games, and then uses the getNextMove() method from the Board class to find the next move in the game.  It then sorts the moves and frequencies by frequency using the sortMovesAndFrequencies() method.
-    moveTable(FEN: str, white: bool)
-        returns a printable table of the most frequent moves after a given FEN, where the player is white (if white bool is True) or black (if white bool is False).  This method uses the findMovesAfterFEN() method to find the moves and frequencies, and then formats them into a printable table.
-    mostCommonMove(FEN: str, white: bool)
-        returns the most frequent move after a given FEN, where the player is white (if white bool is True) or black (if white bool is False).  This method uses the findMovesAfterFEN() method to find the moves and frequencies, and then returns the first move in the list of moves (which is the most frequent move).
+    find_games_with_FEN(FEN: str)
+        finds all of the games that contain a given FEN.  This goes through all of the board objects in games (potentially filtered by filter_game_type()) and checks if they contain the given FEN using their containsFEN() method.  This method simulates through the entire game and checks if the given FEN matches at any point throughout the game.
+    find_games_with_FEN_and_Color(FEN: str, is_white: bool)
+        finds all of the games that contain a given FEN and where the player is white (if is_white bool is True) or black (if is_white bool is False) using the find_games_with_FEN() method.
+    find_moves_after_FEN(FEN: str, is_white: bool)
+        goes through all games, where the player is white (if white bool is True) or black (if is_white bool is False), and finds their most common moves (with frequency) after that FEN.  This method uses the find_games_with_FEN_and_Color() method to find the games, and then uses the getNextMove() method from the Board class to find the next move in the game.  It then sorts the moves and frequencies by frequency using the sortMovesAndFrequencies() method.
+    move_table(FEN: str, is_white: bool)
+        returns a printable table of the most frequent moves after a given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False).  This method uses the find_moves_after_FEN() method to find the moves and frequencies, and then formats them into a printable table.
+    most_common_move(FEN: str, is_white: bool)
+        returns the most frequent move after a given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False).  This method uses the find_moves_after_FEN() method to find the moves and frequencies, and then returns the first move in the list of moves (which is the most frequent move).
     """
     def __init__(self, username: str, import_save: bool = False) :
         """
@@ -136,9 +136,9 @@ class Profile :
             self.all_games.append(Board(game['pgn']))
         for game in self.current_games : #converts all current games to Board objects and adds them to the current_games list
             self.current_games.append(Board(game['pgn']))
-        self.games = self.all_games #self.games is the list of games that is used for analysis.  By default, it is all of the player's games, but it can be filtered by the filterGameType() method to only contain games of a given type (ex. rapid, bullet, ...)
+        self.games = self.all_games #self.games is the list of games that is used for analysis.  By default, it is all of the player's games, but it can be filtered by the filter_game_type() method to only contain games of a given type (ex. rapid, bullet, ...)
 
-    def filterGameType(self, type: str) :
+    def filter_game_type(self, type: str) :
         """
         This method filters the games list to only contain games of a given type (ex. "rapid", "bullet", ...), allowing for more specific analysis (ex. analyzing only bullet games to see the player's most popular bullet openings)
 
@@ -315,9 +315,9 @@ class Profile :
         self.games_data = json.loads(f.readline())
         f.close()
     
-    def findGamesWithFEN(self, FEN: str) :
+    def find_games_with_FEN(self, FEN: str) :
         """
-        Finds all of the games that contain a given FEN.  This goes through all of the board objects in games (potentially filtered by filterGameType()) and checks if they contain the given FEN using their containsFEN() method.  This method simulates through the entire game and checks if the given FEN matches at any point throughout the game.
+        Finds all of the games that contain a given FEN.  This goes through all of the board objects in games (potentially filtered by filter_game_type()) and checks if they contain the given FEN using their containsFEN() method.  This method simulates through the entire game and checks if the given FEN matches at any point throughout the game.
 
         Parameters
         ----------
@@ -335,15 +335,15 @@ class Profile :
                 games.append(board)
         return games
     
-    def findGamesWithFENandColor(self, FEN: str, white: bool) :
+    def find_games_with_FEN_and_Color(self, FEN: str, is_white: bool) :
         """
-        Finds all of the games that contain a given FEN and where the player is white (if white bool is True) or black (if white bool is False) using the findGamesWithFEN() method.
+        Finds all of the games that contain a given FEN and where the player is white (if is_white bool is True) or black (if is_white bool is False) using the find_games_with_FEN() method.
 
         Parameters
         ----------
         FEN : str
             the given FEN to search for
-        white : bool
+        is_white : bool
             whether the player is white or black
         
         Returns
@@ -353,20 +353,20 @@ class Profile :
         """
         games = []
         for board in self.games :
-            if (board.containsFEN(FEN) and ((board.white_player == self.username) == (white == True))) :
+            if (board.containsFEN(FEN) and ((board.white_player == self.username) == (is_white == True))) :
                 games.append(board)
         return games
     
     #goes through all games, where the player is (color), and finds their most common moves (with frequency) after that FEN
-    def findMovesAfterFEN(self, FEN: str, white: bool) :
+    def find_moves_after_FEN(self, FEN: str, is_white: bool) :
         """
-        Goes through all games, where the player is white (if white bool is True) or black (if white bool is False), and finds their most common moves (with frequency) after that FEN.  This method uses the findGamesWithFENandColor() method to find the games, and then uses the getNextMove() method from the Board class to find the next move in the game.  It then sorts the moves and frequencies by frequency using the sortMovesAndFrequencies() method.
+        Goes through all games, where the player is white (if is_white bool is True) or black (if is_white bool is False), and finds their most common moves (with frequency) after that FEN.  This method uses the find_games_with_FEN_and_Color() method to find the games, and then uses the getNextMove() method from the Board class to find the next move in the game.  It then sorts the moves and frequencies by frequency using the sortMovesAndFrequencies() method.
 
         Parameters
         ----------
         FEN : str
             the given FEN to search for
-        white : bool
+        is_white : bool
             whether the player is white or black
 
         Returns
@@ -378,9 +378,9 @@ class Profile :
         """
         moves = []
         frequencies = []
-        games = self.findGamesWithFEN(FEN)
+        games = self.find_games_with_FEN(FEN)
         for game in games :
-            if ((game.white_player == self.username) == (white == True)) : #game matches
+            if ((game.white_player == self.username) == (is_white == True)) : #game matches
                 next_move = game.getNextMove()
                 if (next_move in moves) :
                     frequencies[moves.index(next_move)] += 1
@@ -389,9 +389,9 @@ class Profile :
                     frequencies.append(1)
         return sortMovesAndFrequencies(moves, frequencies)
     
-    def moveTable(self, FEN: str, white: bool) :
+    def move_table(self, FEN: str, is_white: bool) :
         """
-        Returns a printable table of the most frequent moves after a given FEN, where the player is white (if white bool is True) or black (if white bool is False).  This method uses the findMovesAfterFEN() method to find the moves and frequencies, and then formats them into a printable table.  Ex:
+        Returns a printable table of the most frequent moves after a given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False).  This method uses the find_moves_after_FEN() method to find the moves and frequencies, and then formats them into a printable table.  Ex:
         g1f3: 158
         d1h5: 27
         d2d4: 26
@@ -400,37 +400,35 @@ class Profile :
         ----------
         FEN : str
             the given FEN to search for
-        white : bool
+        is_white : bool
             whether the player is white or black
 
         Returns
         -------
         str
-            the printable table of the most frequent moves after the given FEN, where the player is white (if white bool is True) or black (if white bool is False)
+            the printable table of the most frequent moves after the given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False)
         """
-        moves, frequencies = self.findMovesAfterFEN(FEN, white)
+        moves, frequencies = self.find_moves_after_FEN(FEN, is_white)
         s = ""
         for i in range(len(moves)) :
             s += (str(moves[i]) + ": " + str(frequencies[i])) + "\n"
         return s
     
-    def mostCommonMove(self, FEN: str, white: bool) :
+    def most_common_move(self, FEN: str, is_white: bool) :
         """
-        Returns the most frequent move after a given FEN, where the player is white (if white bool is True) or black (if white bool is False).  This method uses the findMovesAfterFEN() method to find the moves and frequencies, and then returns the first move in the list of moves (which is the most frequent move).
+        Returns the most frequent move after a given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False).  This method uses the find_moves_after_FEN() method to find the moves and frequencies, and then returns the first move in the list of moves (which is the most frequent move).
 
         Parameters
         ----------
         FEN : str
             the given FEN to search for
-        white : bool
+        is_white : bool
             whether the player is white or black
 
         Returns
         -------
         Move
-            the most frequent move after the given FEN, where the player is white (if white bool is True) or black (if white bool is False)
+            the most frequent move after the given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False)
         """
-        moves, _ = self.findMovesAfterFEN(FEN, white)
+        moves, _ = self.find_moves_after_FEN(FEN, is_white)
         return moves[0]
-    
-profile = Profile("aronfrish", True)

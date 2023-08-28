@@ -8,7 +8,7 @@ Installation
 
 To use chess-analytica, first install it using pip:
 
-.. code-block:: console
+.. code-block:: python
 
    pip install chess-analytica
 
