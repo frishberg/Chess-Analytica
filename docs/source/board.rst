@@ -17,7 +17,7 @@ To import the Board class alone, you can use the following code:
 
 .. code-block:: python
 
-   from chess-analytica import Board
+   from chess_analytica import Board
 
 Attributes
 -------------

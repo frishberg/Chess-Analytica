@@ -12,7 +12,7 @@ To import the Profile class, you can use the following code:
 
 .. code-block:: python
 
-   from chess-analytica import Board, ChessDotCom
+   from chess_analytica import Board, ChessDotCom
 
 It's important to import the Board file as well, as the ChessDotCom file is built on top of this code.
 
@@ -65,7 +65,7 @@ Example usage:
 
    n = 0
 
-   for game in profiles.games :
+   for game in profile.games :
       if (game.time_length>100) :
          n += 1
    
