@@ -63,7 +63,7 @@ class Profile :
     ----------
     username : str
         the given username of the player
-    import_save : bool
+    save_mode : bool
         whether to import the data from a file in the "cache" folder (True) or scrape the data from the API (False)
     
     Attributes
@@ -114,21 +114,26 @@ class Profile :
     most_common_move(FEN: str, is_white: bool)
         returns the most frequent move after a given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False).  This method uses the find_moves_after_FEN() method to find the moves and frequencies, and then returns the first move in the list of moves (which is the most frequent move).
     """
-    def __init__(self, username: str, import_save: bool = False) :
+    def __init__(self, username: str, save_mode: bool = False) :
         """
         Constructor method for the Profile class.  Takes in the username of the player and uses class methods to scrape the chess.com API for the player's profile, stats, current games, and games, 
         and then modifies the data to be more useful and accessible.  It also stores the games as Board objects, which can be used to get information about the games and play through the sequence of moves.
-        If import_save is True, then the data is imported from a file in the "cache" folder, rather than scraped from the API.  This is much faster, but the data may not be up to date.  If the file does not exist, then the data is scraped from the API instead.  If import_save is False, then the data is scraped from the API.
+        If save_mode is True, then the constructor tries to call the load_info() method.  If the file exists, it sucessfully loads the data from the file and returns True.  If the file does not exist, it scrapes the data from the API and saves it for the next use.  If save_mode is False, then the constructor scrapes the data from the API and does not save it to a file.
         """
         self.username = username
-        if (import_save and self.load_info()) : #if import_save is True, then it tries to call the load_info() method.  If the file exists, it sucessfully loads the data from the file and returns True.  If the file does not exist, it returns False, thus sending the constructor to the else statement, where it scrapes the data from the API
+        if (save_mode and self.load_info()) : #if save_mode is True, then it tries to call the load_info() method.  If the file exists, it sucessfully loads the data from the file and returns True.  If the file does not exist, it returns False, thus sending the constructor to the else statement, where it scrapes the data from the API
             pass
-        else :
+        if (save_mode) :
             self.info = self.retrieve_player_profile()
             self.stats = self.retrieve_player_stats()
             self.current_games_data = self.retrieve_current_games() #contains current game data, scraped directly from chess.com API
             self.games_data = self.retrieve_player_games() #contains all archived game data, scraped directly from chess.com API
             self.save_info() #saves the data to a file in the "cache" folder
+        else :
+            self.info = self.retrieve_player_profile()
+            self.stats = self.retrieve_player_stats()
+            self.current_games_data = self.retrieve_current_games() #contains current game data, scraped directly from chess.com API
+            self.games_data = self.retrieve_player_games() #contains all archived game data, scraped directly from chess.com API
         self.all_games = [] #contains all archived games, stored as Board objects
         self.current_games = [] #contains all current games, stored as Board objects
         for game in self.games_data : #converts all games to Board objects and adds them to the all_games list

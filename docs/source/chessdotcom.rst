@@ -1,5 +1,5 @@
-ChessDotCom
-============
+**ChessDotCom**
+=====================
 
 Summary
 ---------------
@@ -32,21 +32,105 @@ Note: There are some methods that I don't include in this list, such as the impo
 
 __init__ (username: str, import_save: bool)
 ---------------------------------------------------------------------
+This serves as the onstructor method for the Profile class.  It takes in the username of the player and uses class methods to scrape the chess.com API for the player's profile, stats, current games, and games, 
+and then modifies the data to be more useful and accessible.  It also stores the games as Board objects, which can be used to get information about the games and play through the sequence of moves.
+
+**Note:** If save_mode is True, then the constructor tries to call the load_info() method.  If the file exists, it sucessfully loads the data from the file and returns True.  If the file does not exist, it scrapes the data from the API and saves it for the next use.  If save_mode is False, then the constructor scrapes the data from the API and does not save it to a file.
+
+Example usage:
+
+.. code-block:: python
+
+   profile = ChessDotCom.Profile("aronfrish", True) #Note: will create a save file
+   print(profile.username) #aronfrish
+
 
 filter_game_type(type: str)
 ---------------------------
+This method filters the games list to only contain games of a given type (ex. "rapid", "bullet", ...), allowing for more specific analysis (ex. analyzing only bullet games to see the player's most popular bullet openings).
+
+Example usage:
+
+.. code-block:: python
+
+   profile = ChessDotCom.Profile("aronfrish", True)
+   print(len(profile.games)) #855
+   profile.filter_game_type("bullet")
+   print(len(profile.games)) #113
 
 find_games_with_FEN(FEN: str)
 ---------------------------------
+Finds all of the games that contain a given FEN.  This goes through all of the board objects in games (potentially filtered by filter_game_type()) and checks if they contain the given FEN using their containsFEN() method.  This method simulates through the entire game and checks if the given FEN matches at any point throughout the game.
+
+Example usage:
+
+.. code-block:: python
+
+   profile = ChessDotCom.Profile("aronfrish", True)
+   print(len(profile.games)) #855
+   found_games = profile.find_games_with_FEN("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R") #Note: this is the FEN for the 4 knights opening
+   print(len(found_games)) #95 Note: this means that the player has played the 4 knights opening in 95 of their games
+   print(len(found_games)/len(profile.games)) #0.1111111111111111 Note: this means that 11% of the player's games contained the 4 knights opening
 
 find_games_with_FEN_and_Color(FEN: str, is_white: bool)
 ------------------------------------------------------------
+Finds all of the games that contain a given FEN and where the player is white (if is_white bool is True) or black (if is_white bool is False) using the find_games_with_FEN() method.
+
+Example usage:
+
+.. code-block:: python
+
+   profile = ChessDotCom.Profile("aronfrish", True)
+   print(len(profile.games)) #855
+   found_games = profile.find_games_with_FEN_and_Color("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", True) #Note: this is the FEN for the 4 knights opening, and the True means that the player was white
+   print(len(found_games)) #67 Note: this means that the player has played the 4 knights opening in 67 of their games as white
 
 find_moves_after_FEN(FEN: str, is_white: bool)
 ------------------------------------------------
+Goes through all games, where the player is white (if is_white bool is True) or black (if is_white bool is False), and finds their most common moves (with frequency) after that FEN.  This method uses the find_games_with_FEN_and_Color() method to find the games, and then uses the getNextMove() method from the Board class to find the next move in the game.  It then sorts the moves and frequencies by frequency using the sortMovesAndFrequencies() method.
+
+Example usage:
+
+.. code-block:: python
+
+   profile = ChessDotCom.Profile("aronfrish", True)
+   moves = find_moves_after_FEN("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", True) #Note: this is the FEN for the 4 knights opening, and the True means that the player was white
+   print(moves)
+   #([Move.from_uci('c3d5'), Move.from_uci('f1d3'), Move.from_uci('f1c4'), Move.from_uci('d2d3'), Move.from_uci('a2a3'), Move.from_uci('d2d4')], 
+   [27, 16, 15, 4, 3, 2])
+   #Note: this means that in the four knights opening, the player's most common move as white was c3d5, which they played 27 times, their second most common move was f1d3, which they played 16 times, and so on
 
 move_table(FEN: str, is_white: bool)
 --------------------------------------------
+Returns a printable table of the most frequent moves after a given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False).  This method uses the find_moves_after_FEN() method to find the moves and frequencies, and then formats them into a printable table.
+
+Example usage:
+
+.. code-block:: python
+
+   profile = ChessDotCom.Profile("aronfrish", True)
+   print(profile.move_table("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", False)) #Note: this is the FEN for the 4 knights opening, and the True means that the player was black
+   
+   #f1c4: 11
+   #d2d4: 5
+   #f1b5: 5
+   #f3e5: 3
+   #a2a3: 1
+   #b2b3: 1
+   #g2g3: 1
+   #f1e2: 1
+
+   #Note: this means that in the four knights opening, the player's most common move as black was f1c4, which they played 11 times, their second most common move was d2d4, which they played 5 times, and so on
 
 most_common_move(FEN: str, is_white: bool)
 ----------------------------------------------
+Returns the most frequent move after a given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False).  This method uses the find_moves_after_FEN() method to find the moves and frequencies, and then returns the first move in the list of moves (which is the most frequent move).
+
+Example usage:
+
+.. code-block:: python
+
+   profile = ChessDotCom.Profile("aronfrish", True)
+   print(profile.most_common_move("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", False)) #Note: this is the FEN for the 4 knights opening, and the True means that the player was black
+   #f1c4
+   #Note: this means that in the four knights opening, the player's most common move as black was f1c4
