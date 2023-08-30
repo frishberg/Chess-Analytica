@@ -4,8 +4,6 @@
 Summary
 ---------------
 
-ADD NOTE ABOUT attributes being for scraping and methods for analysis
-
 The ChessDotCom file of chess-analytica contains the Profile class, which 
 is the main class of the library.  It allows for the easy scraping of 
 data from the chess.com API, filtering of data, analysis of data, and several other features through its various methods (all detailed below).
@@ -18,7 +16,13 @@ To import the Profile class, you can use the following code:
 
 It's important to import the Board file as well, as the ChessDotCom file is built on top of this code.
 
-WRITE DESCRIPTION.  attributes are for scraping, methods are for analysis.
+**Note: in general, attributes are for scraping, and methods are for analysis.**
+
+Upon creation, a Profile object scrapes the chess.com API for the player's profile, stats, current games, and games.  These are stored as final attributes in the Object, as they are not meant to be changed.  Thus, these should primarily be used for data scraping purposes, as they help with general scraping.
+
+The class contains several methods that allow for accurate analysis of these games, like filtering and searching for specific FEN notations.  These methods are meant to be used for analysis purposes, as they help with specific analysis.
+
+**Note: the Profile constructor has a parameter called "save_mode".  In most cases, this should be set to True, as it will allow for programs to run faster.  Please refer to the __init__() documentation below for more info.**
 
 Attributes
 -------------
@@ -58,6 +62,16 @@ Example usage:
    # P P P K . P P P
    # R N B n . B . R
    #Note: this is what the final state of this players first game looked like
+
+   n = 0
+
+   for game in profiles.games :
+      if (game.time_length>100) :
+         n += 1
+   
+   print(n)
+   #671
+   #Note: this means that the player has played 671 games that lasted longer than 100 seconds
 
 Methods
 ----------------
