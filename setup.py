@@ -14,7 +14,7 @@ with open(path.join(HERE, 'README.rst'), encoding='utf-8') as f:
 # This call to setup() does all the work
 setup(
     name="chess-analytica",
-    version="1.0.5",
+    version="1.0.6",
     description="Making chess analytics easy.",
     long_description=long_description,
     long_description_content_type="text/markdown",
