@@ -84,6 +84,10 @@ class Profile :
         the player's current ongoing games, stored as Board objects
     games : list
         the player's games, stored as Board objects.  This contains a filtered version of the all_games list, filtered by the filter_game_type() method.  By default, this list contains all of the player's games, but can be filtered to only contain rapid games, bullet games, etc. to allow for more specific analysis (ex. analyzing only bullet games to see the player's most popular bullet openings)
+    white_games : list
+        the subset of the games list that contains only games where the player is white.  This list might be filtered, as it is a subset of the games list
+    black_games : list
+        the subset of the games list that contains only games where the player is black.  This list might be filtered, as it is a subset of the games list
     
     Methods
     -------
@@ -113,6 +117,10 @@ class Profile :
         returns a printable table of the most frequent moves after a given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False).  This method uses the find_moves_after_FEN() method to find the moves and frequencies, and then formats them into a printable table.
     most_common_move(FEN: str, is_white: bool)
         returns the most frequent move after a given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False).  This method uses the find_moves_after_FEN() method to find the moves and frequencies, and then returns the first move in the list of moves (which is the most frequent move).
+    get_white_games()
+        returns a list of all of the games where the player is white (using the games list, which might be filtered)
+    get_black_games()
+        returns a list of all of the games where the player is black (using the games list, which might be filtered)
     """
     def __init__(self, username: str, save_mode: bool = False) :
         """
@@ -141,7 +149,9 @@ class Profile :
         for game in self.current_games : #converts all current games to Board objects and adds them to the current_games list
             self.current_games.append(Board(game['pgn']))
         self.games = self.all_games #self.games is the list of games that is used for analysis.  By default, it is all of the player's games, but it can be filtered by the filter_game_type() method to only contain games of a given type (ex. rapid, bullet, ...)
-
+        self.white_games = self.get_white_games() #contains all games where the player is white, stored as Board objects
+        self.black_games = self.get_black_games() #contains all games where the player is black, stored as Board objects
+    
     def filter_game_type(self, type: str) :
         """
         This method filters the games list to only contain games of a given type (ex. "rapid", "bullet", ...), allowing for more specific analysis (ex. analyzing only bullet games to see the player's most popular bullet openings)
@@ -152,6 +162,8 @@ class Profile :
             the type of game to filter the games list to.  This can be a number in seconds (ex. 600, 60+1, ...) or a string (ex. "rapid", "bullet", ...)
         """
         self.games = [] #clears the games list
+        self.white_games = [] #clears the white_games list
+        self.black_games = [] #clears the black_games list
         if ("0" in type) : #if the type was given as a number in seconds (ex. 600, 60+1, ...)
             for game in self.all_games :
                 if (game.time_control == type) : #finds all games with the given time control
@@ -176,6 +188,8 @@ class Profile :
                 for game in self.all_games :
                     if (game.time_control=="86400") :
                         self.games.append(game)
+        self.white_games = self.get_white_games() #updates the white_games list
+        self.black_games = self.get_black_games() #updates the black_games list
 
     def retrieve_player_profile(self) :
         """
@@ -436,3 +450,24 @@ class Profile :
         """
         moves, _ = self.find_moves_after_FEN(FEN, is_white)
         return moves[0]
+    
+    def get_white_games(self) :
+        """
+        Returns a list of all of the games where the player is white (using the games list, which might be filtered)
+        """
+        temp = []
+        for game in self.games :
+            if (game.white_player == self.username) :
+                temp.append(game)
+        return temp
+        
+    
+    def get_black_games(self) :
+        """
+        Returns a list of all of the games where the player is black (using the games list, which might be filtered)
+        """
+        temp = []
+        for game in self.games :
+            if (game.black_player == self.username) :
+                temp.append(game)
+        return temp

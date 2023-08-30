@@ -4,6 +4,5 @@
 - filter to colors as well?
 - findX functions.  An example would be findOpening() function, where it finds all the games where you did a specific opening.  You could also make other functions to find games with other specific features
 - add "winner" username to each game
-- add "white_games" and "black_games" to the profile attributes
 - fix Pypi documentation, format is messed up
 - maybe make it so that when it prints out a move, it just prints out e2e4 instead of all the surrounding notation

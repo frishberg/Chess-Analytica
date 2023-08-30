@@ -35,6 +35,8 @@ Below I've provided all useful attributes of the Profile classalong with a use c
 * stats
 * current_games
 * games
+* white_games
+* black_games
 
 Example usage:
 

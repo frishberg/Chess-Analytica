@@ -1,5 +1,5 @@
 **Usage**
-=====
+============
 
 .. _installation:
 
@@ -53,7 +53,7 @@ There is also a filter option implemented into this library, that can be used as
    #334
 
    italian_games = profile.find_games_with_FEN_and_Color("r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R", True) #Note: this FEN is the italian game and the target player color is white (because is_white is set to True)
-   print(len(italian_games)/len(profile.games)) #Note: this will print the percentage of rapid games (where the player is white) that the player has played the italian game
+   print(len(italian_games)/len(profile.white_games)) #Note: this will print the percentage of rapid games (where the player is white) that the player has played the italian game
    #0.013888888888888888
 
 
