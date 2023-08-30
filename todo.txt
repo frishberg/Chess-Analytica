@@ -1,7 +1,4 @@
 - add tests
-- write read me
-- write docs
-- filter to colors as well?
 - findX functions.  An example would be findOpening() function, where it finds all the games where you did a specific opening.  You could also make other functions to find games with other specific features
 - add "winner" username to each game
 - fix Pypi documentation, format is messed up
