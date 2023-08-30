@@ -79,8 +79,10 @@ Below I've provided all useful methods of the Profile class, along with a brief 
 
 **Note:** There are some methods that I don't include in this list, such as the import_json_from_url method (which is used to scrape from the chess.com API), as they are not meant to be used by the user, and are only meant to be used by the other more important methods.
 
-__init__ (username: str, save_mode: bool)
+__init__
 ---------------------------------------------------------------------
+Parameters: username (str), save_mode (bool)
+
 This serves as the onstructor method for the Profile class.  It takes in the username of the player and uses class methods to scrape the chess.com API for the player's profile, stats, current games, and games, 
 and then modifies the data to be more useful and accessible.  It also stores the games as Board objects, which can be used to get information about the games and play through the sequence of moves.
 
@@ -95,8 +97,10 @@ Example usage:
    print(profile.username) #aronfrish
 
 
-filter_game_type(type: str)
+filter_game_type
 ---------------------------
+Parameters: type (str)
+
 This method filters the games list to only contain games of a given type (ex. "rapid", "bullet", ...), allowing for more specific analysis (ex. analyzing only bullet games to see the player's most popular bullet openings).
 
 Example usage:
@@ -111,8 +115,14 @@ Example usage:
    
    print(len(profile.games)) #113
 
-find_games_with_FEN(FEN: str)
+   profile.filter_game_type("600") #Note: this is a 10-minute game
+
+   print(len(profile.games)) #720
+
+find_games_with_FEN
 ---------------------------------
+Parameters: FEN (str)
+
 Finds all of the games that contain a given FEN.  This goes through all of the board objects in games (potentially filtered by filter_game_type()) and checks if they contain the given FEN using their containsFEN() method.  This method simulates through the entire game and checks if the given FEN matches at any point throughout the game.
 
 Example usage:
@@ -129,8 +139,10 @@ Example usage:
    
    print(len(found_games)/len(profile.games)) #0.1111111111111111 Note: this means that 11% of the player's games contained the 4 knights opening
 
-find_games_with_FEN_and_Color(FEN: str, is_white: bool)
+find_games_with_FEN_and_Color
 ------------------------------------------------------------
+Parameters: FEN (str), is_white (bool)
+
 Finds all of the games that contain a given FEN and where the player is white (if is_white bool is True) or black (if is_white bool is False) using the find_games_with_FEN() method.
 
 Example usage:
@@ -145,8 +157,10 @@ Example usage:
    
    print(len(found_games)) #67 Note: this means that the player has played the 4 knights opening in 67 of their games as white
 
-find_moves_after_FEN(FEN: str, is_white: bool)
+find_moves_after_FEN
 ------------------------------------------------
+Parameters: FEN (str), is_white (bool)
+
 Goes through all games, where the player is white (if is_white bool is True) or black (if is_white bool is False), and finds their most common moves (with frequency) after that FEN.  This method uses the find_games_with_FEN_and_Color() method to find the games, and then uses the getNextMove() method from the Board class to find the next move in the game.  It then sorts the moves and frequencies by frequency using the sortMovesAndFrequencies() method.
 
 Example usage:
@@ -162,8 +176,10 @@ Example usage:
    [27, 16, 15, 4, 3, 2])
    #Note: this means that in the four knights opening, the player's most common move as white was c3d5, which they played 27 times, their second most common move was f1d3, which they played 16 times, and so on
 
-move_table(FEN: str, is_white: bool)
+move_table
 --------------------------------------------
+Parameters: FEN (str), is_white (bool)
+
 Returns a printable table of the most frequent moves after a given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False).  This method uses the find_moves_after_FEN() method to find the moves and frequencies, and then formats them into a printable table.
 
 Example usage:
@@ -185,8 +201,10 @@ Example usage:
 
    #Note: this means that in the four knights opening, the player's most common move as black was f1c4, which they played 11 times, their second most common move was d2d4, which they played 5 times, and so on
 
-most_common_move(FEN: str, is_white: bool)
+most_common_move
 ----------------------------------------------
+Parameters: FEN (str), is_white (bool)
+
 Returns the most frequent move after a given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False).  This method uses the find_moves_after_FEN() method to find the moves and frequencies, and then returns the first move in the list of moves (which is the most frequent move).
 
 Example usage:
