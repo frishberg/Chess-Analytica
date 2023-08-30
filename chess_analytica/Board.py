@@ -142,11 +142,11 @@ class Board :
         Returns whether there are moves left in the game
     reset()
         Resets the board to the beginning of the game
-    containsFEN(FEN: str)
+    contains_FEN(FEN: str)
         Simulates the board through all moves, checking after each move is made to see if the current FEN of the board matches the given FEN.  If it does, the method returns True.  Otherwise, it returns False.  This method is used to check if the state of the game ever matches a given FEN.
-    getNextMove()
+    get_next_move()
         Returns the next move in the game
-    finalState()
+    get_final_state()
         Returns a visual representation of the final state of the board, after all moves have been made
     """
 
@@ -161,7 +161,7 @@ class Board :
         self.game = chess.pgn.read_game(self.pgn) #creating game object
         self.board = self.game.board() #creating board object
         self.moves_left = list(self.game.mainline_moves()) #moves left in the game (length will be reduced as move method is called, but can be reset with reset method)
-        self.final_state = self.getfinalState() #visual representation of the final state of the board, after all moves have been made
+        self.final_state = self.get_final_state() #visual representation of the final state of the board, after all moves have been made
 
     def __str__(self) :
         """
@@ -204,7 +204,7 @@ class Board :
         """
         self = self.__init__(self.PGN)
 
-    def containsFEN(self, FEN: str) :
+    def contains_FEN(self, FEN: str) :
         """
         Simulates the board through all moves, checking after each move is made to see if the current FEN of the board matches the given FEN.  If it does, the method returns True.  Otherwise, it returns False.  This method is used to check if the state of the game ever matches a given FEN.
 
@@ -225,13 +225,13 @@ class Board :
                 return True
         return False
     
-    def getNextMove(self) :
+    def get_next_move(self) :
         """
         Returns the next move in the game
         """
         return self.moves_left[0]
     
-    def getfinalState(self) :
+    def get_final_state(self) :
         """
         Returns a visual representation of the final state of the board, after all moves have been made 
         """

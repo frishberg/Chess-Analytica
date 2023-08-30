@@ -26,7 +26,7 @@ The class contains several methods that allow for accurate analysis of these gam
 
 Attributes
 -------------
-Below I've provided all useful attributes of the Profile class, along with a brief description and example usage of each.  For more information on each attribute, please refer to the docstrings in the code.
+Below I've provided all useful attributes of the Profile classalong with a use case for each.  For more information on each attribute, please refer to the docstrings in the code.
 
 **Note:** There are some attributes that I don't include in this list, such as the PGN attribute (which is the unformatted PGN scraped directly from chess.com), as they are not meant to be used by the user, and are only meant to be used by the other more important attributes and methods.
 
