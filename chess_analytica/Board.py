@@ -82,6 +82,11 @@ def calculate_time_length(start_time: str, end_time: str) :
     time_length = (end_time[0]-start_time[0])*3600 + (end_time[1]-start_time[1])*60 + (end_time[2]-start_time[2])
     return time_length
 
+def extract_winner(termination) :
+    if "Game drawn" in termination :
+        return "draw"
+    return termination[:termination.index(" ")]
+
 class Board :
     """
     Board class that represents a chess.com game.  Each object contains data, such start time, end time, the white player, the elo of the black playey, and so on.
@@ -129,6 +134,8 @@ class Board :
         a list of the moves left in the game (length will be reduced as move method is called, but can be reset with reset method)
     final_state : str
         a visual representation of the final state of the board, after all moves have been made
+    winner : str
+        the winner of the game (ex. aronfrish or draw)
     
     Methods
     -------
@@ -162,6 +169,7 @@ class Board :
         self.board = self.game.board() #creating board object
         self.moves_left = list(self.game.mainline_moves()) #moves left in the game (length will be reduced as move method is called, but can be reset with reset method)
         self.final_state = self.get_final_state() #visual representation of the final state of the board, after all moves have been made
+        self.winner = extract_winner(self.termination) #winner of the game (ex. aronfrish or draw)
 
     def __str__(self) :
         """

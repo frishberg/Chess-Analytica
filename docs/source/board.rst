@@ -39,6 +39,7 @@ Below I've provided all useful attributes of the Board classalong with a use cas
 * board
 * moves_left
 * final_state
+* winner
 
 Example usage:
 
@@ -91,6 +92,9 @@ Example usage:
    # . . . P . . . .
    # P P P K . P P P
    # R N B n . B . R
+
+   print(game.winner) #8ak34
+   #Note: this returns "draw" in the case of a draw
 
 Methods
 ----------------
