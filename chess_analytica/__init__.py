@@ -1,2 +1,2 @@
-from Board import Board
-from ChessDotCom import Profile
+from .Board import Board
+from .ChessDotCom import Profile

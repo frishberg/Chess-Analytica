@@ -174,7 +174,7 @@ Example usage:
    moves = find_moves_after_FEN("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", True) #Note: this is the FEN for the 4 knights opening, and the True means that the player was white
    
    print(moves)
-   #([Move.from_uci('c3d5'), Move.from_uci('f1d3'), Move.from_uci('f1c4'), Move.from_uci('d2d3'), Move.from_uci('a2a3'), Move.from_uci('d2d4')], 
+   #(['c3d5', 'f1d3', 'f1c4', 'd2d3', 'a2a3', 'd2d4'], 
    [27, 16, 15, 4, 3, 2])
    #Note: this means that in the four knights opening, the player's most common move as white was c3d5, which they played 27 times, their second most common move was f1d3, which they played 16 times, and so on
 

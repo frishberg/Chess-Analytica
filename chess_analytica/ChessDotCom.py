@@ -471,7 +471,3 @@ class Profile :
             if (game.black_player == self.username) :
                 temp.append(game)
         return temp
-
-profile = Profile("aronfrish", True) #creates a Profile object for the chess.com profile, and loads the data from the cache file (if it exists)
-for game in profile.games :
-    print(game.termination)

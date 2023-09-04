@@ -81,7 +81,7 @@ Example usage:
    # P P P P P P P P
    # R N B Q K B N R
    
-   print(game.moves_left) #[Move.from_uci('e2e4'), Move.from_uci('e7e5'), Move.from_uci('g1f3'), Move.from_uci('g8f6'), Move.from_uci('f3e5'), Move.from_uci('d8e7'), Move.from_uci('e5g4'), Move.from_uci('f6e4'), Move.from_uci('d2d3'), Move.from_uci('e4c3'), Move.from_uci('e1d2'), Move.from_uci('c3d1')]
+   print(game.moves_left) #['e2e4', 'e7e5', 'g1f3', 'g8f6', 'f3e5', 'd8e7', 'e5g4', 'f6e4', 'd2d3', 'e4c3', 'e1d2', 'c3d1']
    
    print(game.final_state)
    # r n b . k b . r
@@ -283,4 +283,4 @@ Example usage:
 
    board = Board(game.PGN) #Note: assuming game.PGN is formatted correctly
 
-   print(board.get_next_move()) #Move.from_uci('e2e4')
+   print(board.get_next_move()) #e2e4
