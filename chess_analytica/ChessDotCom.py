@@ -21,7 +21,7 @@ def import_json_from_url(url: str) :
         data = json.loads(url.read().decode())
         return data
 
-def sortMovesAndFrequencies(moves: list, frequencies: list) :
+def sort_moves_and_frequencies(moves: list, frequencies: list) :
     """
     Sorts a list of moves and frequencies (whose indexes correspond) by frequency.  This is used to check the most frequent moves in a game, and is thus used for the move_table() and most_common_move() methods.
     
@@ -108,7 +108,7 @@ class Profile :
     load_info()
         loads the player's profile, stats, current games, and games from a file in the "cache" folder.  If the file does not exist, it raises an exception
     find_games_with_FEN(FEN: str)
-        finds all of the games that contain a given FEN.  This goes through all of the board objects in games (potentially filtered by filter_game_type()) and checks if they contain the given FEN using their containsFEN() method.  This method simulates through the entire game and checks if the given FEN matches at any point throughout the game.
+        finds all of the games that contain a given FEN.  This goes through all of the board objects in games (potentially filtered by filter_game_type()) and checks if they contain the given FEN using their contains_FEN() method.  This method simulates through the entire game and checks if the given FEN matches at any point throughout the game.
     find_games_with_FEN_and_Color(FEN: str, is_white: bool)
         finds all of the games that contain a given FEN and where the player is white (if is_white bool is True) or black (if is_white bool is False) using the find_games_with_FEN() method.
     find_moves_after_FEN(FEN: str, is_white: bool)
@@ -335,7 +335,7 @@ class Profile :
     
     def find_games_with_FEN(self, FEN: str) :
         """
-        Finds all of the games that contain a given FEN.  This goes through all of the board objects in games (potentially filtered by filter_game_type()) and checks if they contain the given FEN using their containsFEN() method.  This method simulates through the entire game and checks if the given FEN matches at any point throughout the game.
+        Finds all of the games that contain a given FEN.  This goes through all of the board objects in games (potentially filtered by filter_game_type()) and checks if they contain the given FEN using their contains_FEN() method.  This method simulates through the entire game and checks if the given FEN matches at any point throughout the game.
 
         Parameters
         ----------
@@ -345,11 +345,11 @@ class Profile :
         Returns
         -------
         list
-            the games that "contain" (refer to the containsFEN() method in the Board class) the given FEN
+            the games that "contain" (refer to the contains_FEN() method in the Board class) the given FEN
         """
         games = []
         for board in self.games :
-            if (board.containsFEN(FEN)) :
+            if (board.contains_FEN(FEN)) :
                 games.append(board)
         return games
     
@@ -367,11 +367,11 @@ class Profile :
         Returns
         -------
         list
-            the games that "contain" (refer to the containsFEN() method in the Board class) the given FEN and where the player is (color)
+            the games that "contain" (refer to the contains_FEN() method in the Board class) the given FEN and where the player is (color)
         """
         games = []
         for board in self.games :
-            if (board.containsFEN(FEN) and ((board.white_player == self.username) == (is_white == True))) :
+            if (board.contains_FEN(FEN) and ((board.white_player == self.username) == (is_white == True))) :
                 games.append(board)
         return games
     
@@ -399,13 +399,13 @@ class Profile :
         games = self.find_games_with_FEN(FEN)
         for game in games :
             if ((game.white_player == self.username) == (is_white == True)) : #game matches
-                next_move = game.getNextMove()
+                next_move = game.get_next_move().uci() #gets next move from game and uses .uci() to convert it to a readable string (ex. Move.from_uci('b1c3') -> b1c3)
                 if (next_move in moves) :
                     frequencies[moves.index(next_move)] += 1
                 else :
                     moves.append(next_move)
                     frequencies.append(1)
-        return sortMovesAndFrequencies(moves, frequencies)
+        return sort_moves_and_frequencies(moves, frequencies)
     
     def move_table(self, FEN: str, is_white: bool) :
         """
@@ -430,7 +430,7 @@ class Profile :
         s = ""
         for i in range(len(moves)) :
             s += (str(moves[i]) + ": " + str(frequencies[i])) + "\n"
-        return s
+        return s[-1]
     
     def most_common_move(self, FEN: str, is_white: bool) :
         """
