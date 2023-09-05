@@ -1,6 +1,10 @@
 Chess-Analytica: chess analytics made easy
 ================================================================================
 
+.. image:: https://readthedocs.org/projects/python-chess/badge/?version=latest
+    :target: https://python-chess.readthedocs.io/en/latest/
+    :alt: Docs
+
 .. image:: https://badge.fury.io/py/chess-analytica.svg
     :target: https://badge.fury.io/py/chess-analytica
 
