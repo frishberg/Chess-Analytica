@@ -30,23 +30,24 @@ all of a given player's past (or current) games, filter the games down, and then
 
 .. code:: python
 
-    >>> from chess_analytica import Board, ChessDotCom
+    from chess_analytica import Board, ChessDotCom
 
-    >>> profile = ChessDotCom("aronfrish", False) #False means that it will not try to import the games from the "cache" folder
+    profile = ChessDotCom.Profile("aronfrish", False)
 
-    >>> print(profile.games[0].white_player)
-    #aronfrish
+    profile.filterGameType("rapid")
 
-    >>> print(profile.games[0].final_state + " \n" + profile.games[0].link)
-    #r n b . k b . r
-    #p p p p q p p p
-    #. . . . . . . .
-    #. . . . . . . .
-    #. . . . . . N .
-    #. . . P . . . .
-    #P P P K . P P P
-    #R N B n . B . R
-    #https://www.chess.com/game/live/77569257661
+    print(len(profile.games)) #720
+
+    n = 0
+    for game in profile.games : #Note: this is still filtered to rapid
+    if ("resignation" in game.termination) :
+        n += 1
+    print(n) #Note: this will print the number of the player's rapid games that ended in resignation
+    #334
+
+    italian_games = profile.find_games_with_FEN_and_Color("r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R", True) #Note: this FEN is the italian game and the target player color is white (because is_white is set to True)
+    print(len(italian_games)/len(profile.white_games)) #Note: this will print the percentage of rapid games (where the player is white) that the player has played the italian game
+    #0.013888888888888888
 
 Installing
 ----------
