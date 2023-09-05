@@ -5,13 +5,13 @@ Chess-Analytica: chess analytics made easy
     :target: https://pypi.org/project/chess-analytica/
     :alt: PyPI
 
+.. image:: https://static.pepy.tech/badge/chess-analytica
+    :target: https://pepy.tech/project/chess-analytica
+    :alt: Downloads
+
 .. image:: https://readthedocs.org/projects/python-chess/badge/?version=latest
     :target: https://python-chess.readthedocs.io/en/latest/
     :alt: Docs
-
-.. image:: https://img.shields.io/pypi/dm/chess-analytica
-    :target: https://pypi.org/project/chess-analytica/
-    :alt: Downloads
 
 .. image:: https://img.shields.io/pypi/l/chess-analytica
     :target: https://pypi.org/project/chess-analytica/
