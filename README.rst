@@ -1,12 +1,25 @@
 Chess-Analytica: chess analytics made easy
 ================================================================================
 
+.. image:: https://img.shields.io/pypi/v/chess-analytica
+    :target: https://pypi.org/project/chess-analytica/
+    :alt: PyPI
+
 .. image:: https://readthedocs.org/projects/python-chess/badge/?version=latest
     :target: https://python-chess.readthedocs.io/en/latest/
     :alt: Docs
 
-.. image:: https://badge.fury.io/py/chess-analytica.svg
-    :target: https://badge.fury.io/py/chess-analytica
+.. image:: https://img.shields.io/pypi/dm/chess-analytica
+    :target: https://pypi.org/project/chess-analytica/
+    :alt: Downloads
+
+.. image:: https://img.shields.io/pypi/l/chess-analytica
+    :target: https://pypi.org/project/chess-analytica/
+    :alt: License
+
+.. image:: https://img.shields.io/pypi/status/chess-analytica
+    :target: https://pypi.org/project/chess-analytica/
+    :alt: Status
 
 Introduction
 ------------
