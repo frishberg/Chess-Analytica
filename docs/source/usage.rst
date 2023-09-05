@@ -6,7 +6,7 @@
 Installation
 ---------------
 
-To use chess-analytica, first install it using pip:
+To use Chess-Analytica, first install it using pip:
 
 .. code-block:: python
 

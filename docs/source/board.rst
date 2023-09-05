@@ -4,7 +4,7 @@
 Summary
 ---------------
 
-The Board file of chess-analytica contains the Board class, which 
+The Board file of Chess-Analytica contains the Board class, which 
 is used by the ChessDotCom class to represent a board/chess game.  This class is built off of 
 the chess library, which allowed for the easy implementation of the board and game logic.
 

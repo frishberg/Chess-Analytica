@@ -1,29 +1,27 @@
 from setuptools import setup
 
-# To use a consistent encoding
 from codecs import open
 from os import path
 
-# The directory containing this file
 HERE = path.abspath(path.dirname(__file__))
 
-# Get the long description from the README file
-with open(path.join(HERE, 'README.rst'), encoding='utf-8') as f:
+with open(path.join(HERE, 'pypiREADME.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
-# This call to setup() does all the work
 setup(
     name="chess-analytica",
-    version="1.0.8",
+    version="1.1.2a",
     description="Making chess analytics easy.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://chess-analytica.readthedocs.io/",
+    url="https://github.com/AronFrish/Chess-Analytica",
     author="Aron Frishberg",
     author_email="frishberg@uchicago.edu",
     license="MIT",
     classifiers=[
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
+        "Intended Audience :: Science/Research",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
@@ -31,8 +29,14 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
-        "Operating System :: OS Independent"
+        "Operating System :: OS Independent",
+        "Topic :: Games/Entertainment :: Board Games",
+        "Topic :: Games/Entertainment :: Turn Based Strategy",
+        "Topic :: Software Development :: Libraries :: Python Modules",
     ],
+    project_urls={
+        "Documentation": "https://chess-analytica.readthedocs.io",
+    },
     packages=["chess_analytica"],
     include_package_data=True,
     install_requires=["chess", "urllib3"]

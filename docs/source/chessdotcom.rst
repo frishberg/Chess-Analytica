@@ -4,7 +4,7 @@
 Summary
 ---------------
 
-The ChessDotCom file of chess-analytica contains the Profile class, which 
+The ChessDotCom file of Chess-Analytica contains the Profile class, which 
 is the main class of the library.  It allows for the easy scraping of 
 data from the chess.com API, filtering of data, analysis of data, and several other features through its various methods (all detailed below).
 
