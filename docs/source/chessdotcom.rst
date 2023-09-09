@@ -121,6 +121,10 @@ Example usage:
 
    print(len(profile.games)) #720
 
+   profile.filter_game_type("all") #Note: this resets the filter
+
+   print(len(profile.games)) #855
+
 find_games_with_FEN
 ---------------------------------
 Parameters: FEN (str)

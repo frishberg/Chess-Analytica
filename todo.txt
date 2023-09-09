@@ -2,3 +2,4 @@
 - findX functions.  An example would be findOpening() function, where it finds all the games where you did a specific opening.  You could also make other functions to find games with other specific features
 - fix Pypi documentation, format is messed up
 - finish GitHub documentation
+- add protections for move table, like if it's an empty string

@@ -1,48 +1,35 @@
 import unittest
 import math
-from medium_multiply import Multiplication
+from chess_analytica import Board, ChessDotCom
 
 
-class MultiplicationTestCase(unittest.TestCase):
+class ProfileTesting(unittest.TestCase):
 
     def setUp(self):
-        self.multiplication = Multiplication(2)
+        self.profile = ChessDotCom.Profile("aronfrishb", False) #aronfrishb was an old account of mine that is inactive, so the results will be consistent
 
-    def test_zero(self):
-        """Test 0 multiplied by 2"""
+    def test_user_info(self) :
+        self.assertEqual(self.profile.username, "aronfrishb")
+        self.assertEqual(self.profile.stats["rapid"]["rating"], 719)
+        self.assertEqual(len(self.profile.games), 16)
+    
+    def test_filter_game_type(self) :
+        self.profile.filter_game_type("rapid")
+        self.assertEqual(len(self.profile.games), 15)
+        self.profile.filter_game_type("all") #resetting filter
 
-        # 0 multiplied by 2 return 0
-        result = self.multiplication.multiply(0)
-        self.assertEqual(result, 0)
+    def test_find_games_with_FEN(self) :
+        self.assertEqual(len(self.profile.find_games_with_FEN("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R")), 1) #looking for 4 knights game
 
-    def test_natural_number(self):
-        """Test natural number 5 multiplied by 2"""
-
-        # 5 multiplied by 2 return 10
-        result = self.multiplication.multiply(5)
-        self.assertEqual(result, 10)
-
-    def test_integer_number(self):
-        """Test integer number -7 multiplied by 2"""
-
-        # -7 multiplied by 2 return -14
-        result = self.multiplication.multiply(-7)
-        self.assertEqual(result, -14)
-
-    def test_rational_number(self):
-        """Test rational number 6/17 multiplied by 2"""
-
-        # 6/17 multiplied by 2 return (6/17) * 2
-        result = self.multiplication.multiply(6/17)
-        self.assertEqual(result, (6/17) * 2)
-
-    def test_real_number(self):
-        """Test real number PI multiplied by 2"""
-
-        # PI multiplied by 2 return 2PI
-        result = self.multiplication.multiply(math.pi)
-        self.assertEqual(result, math.pi * 2)
-
+    def test_find_games_with_FEN_and_Color(self) :
+        self.assertEqual(len(self.profile.find_games_with_FEN_and_Color("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", True)), 1) #looking for 4 knights game as white
+        self.assertEqual(len(self.profile.find_games_with_FEN_and_Color("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", False)), 0) #looking for 4 knights game as black
+    
+    def find_moves_after_FEN(self) :
+        self.assertEqual(len(self.profile.find_moves_after_FEN("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R")), 1)
+    
+    def test_most_common_move(self) :
+        self.assertEqual(self.profile.most_common_move("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", True), "d2d4")
 
 if __name__ == '__main__':
     unittest.main()

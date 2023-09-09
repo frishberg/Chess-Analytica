@@ -240,36 +240,50 @@ class Profile :
         stats_dict["blitz"] = {}
         url = "https://api.chess.com/pub/player/" + self.username + "/stats"
         result = import_json_from_url(url)
-        stats_dict["daily"]["rating"] = result["chess_daily"]["last"]["rating"]
-        stats_dict["daily"]["won"] = result["chess_daily"]["record"]["win"]
-        stats_dict["daily"]["lost"] = result["chess_daily"]["record"]["loss"]
-        stats_dict["daily"]["drawn"] = result["chess_daily"]["record"]["draw"]
-        stats_dict["daily"]["played"] = stats_dict["daily"]["won"] + stats_dict["daily"]["lost"] + stats_dict["daily"]["drawn"]
-        stats_dict["daily"]["pct-won"] = self.calc_pct(stats_dict["daily"]["won"], stats_dict["daily"]["played"])
-        stats_dict["daily"]["pct-lost"] = self.calc_pct(stats_dict["daily"]["lost"], stats_dict["daily"]["played"])
-        stats_dict["daily"]["pct-drawn"] = self.calc_pct(stats_dict["daily"]["drawn"], stats_dict["daily"]["played"])
-        stats_dict["rapid"]["rating"] = result["chess_rapid"]["last"]["rating"]
-        stats_dict["rapid"]["won"] = result["chess_rapid"]["record"]["win"]
-        stats_dict["rapid"]["lost"] = result["chess_rapid"]["record"]["loss"]
-        stats_dict["rapid"]["drawn"] = result["chess_rapid"]["record"]["draw"]
-        stats_dict["rapid"]["played"] = stats_dict["rapid"]["won"] + stats_dict["rapid"]["lost"] + stats_dict["rapid"]["drawn"]
-        stats_dict["rapid"]["pct-won"] = self.calc_pct(stats_dict["rapid"]["won"], stats_dict["rapid"]["played"])
-        stats_dict["rapid"]["pct-lost"] = self.calc_pct(stats_dict["rapid"]["lost"], stats_dict["rapid"]["played"])
-        stats_dict["rapid"]["pct-drawn"] = self.calc_pct(stats_dict["rapid"]["drawn"], stats_dict["rapid"]["played"])
-        stats_dict["bullet"]["rating"] = result["chess_bullet"]["last"]["rating"]
-        stats_dict["bullet"]["won"] = result["chess_bullet"]["record"]["win"]
-        stats_dict["bullet"]["lost"] = result["chess_bullet"]["record"]["loss"]
-        stats_dict["bullet"]["drawn"] = result["chess_bullet"]["record"]["draw"]
-        stats_dict["bullet"]["played"] = stats_dict["bullet"]["won"] + stats_dict["bullet"]["lost"] + stats_dict["bullet"]["drawn"]
-        stats_dict["bullet"]["pct-won"] = self.calc_pct(stats_dict["bullet"]["won"], stats_dict["bullet"]["played"])
-        stats_dict["blitz"]["rating"] = result["chess_blitz"]["last"]["rating"]
-        stats_dict["blitz"]["won"] = result["chess_blitz"]["record"]["win"]
-        stats_dict["blitz"]["lost"] = result["chess_blitz"]["record"]["loss"]
-        stats_dict["blitz"]["drawn"] = result["chess_blitz"]["record"]["draw"]
-        stats_dict["blitz"]["played"] = stats_dict["blitz"]["won"] + stats_dict["blitz"]["lost"] + stats_dict["blitz"]["drawn"]
-        stats_dict["blitz"]["pct-won"] = self.calc_pct(stats_dict["blitz"]["won"], stats_dict["blitz"]["played"])
-        stats_dict["blitz"]["pct-lost"] = self.calc_pct(stats_dict["blitz"]["lost"], stats_dict["blitz"]["played"])
-        stats_dict["blitz"]["pct-drawn"] = self.calc_pct(stats_dict["blitz"]["drawn"], stats_dict["blitz"]["played"])
+        try :
+            stats_dict["daily"]["rating"] = result["chess_daily"]["last"]["rating"]
+            stats_dict["daily"]["won"] = result["chess_daily"]["record"]["win"]
+            stats_dict["daily"]["lost"] = result["chess_daily"]["record"]["loss"]
+            stats_dict["daily"]["drawn"] = result["chess_daily"]["record"]["draw"]
+            stats_dict["daily"]["played"] = stats_dict["daily"]["won"] + stats_dict["daily"]["lost"] + stats_dict["daily"]["drawn"]
+            stats_dict["daily"]["pct-won"] = self.calc_pct(stats_dict["daily"]["won"], stats_dict["daily"]["played"])
+            stats_dict["daily"]["pct-lost"] = self.calc_pct(stats_dict["daily"]["lost"], stats_dict["daily"]["played"])
+            stats_dict["daily"]["pct-drawn"] = self.calc_pct(stats_dict["daily"]["drawn"], stats_dict["daily"]["played"])
+        except : #in the case the player has no daily games
+            stats_dict["daily"]["rating"], stats_dict["daily"]["won"], stats_dict["daily"]["lost"], stats_dict["daily"]["drawn"], stats_dict["daily"]["played"], stats_dict["daily"]["pct-won"], stats_dict["daily"]["pct-lost"], stats_dict["daily"]["pct-drawn"] = 0, 0, 0, 0, 0, 0, 0, 0
+        try :
+            stats_dict["rapid"]["rating"] = result["chess_rapid"]["last"]["rating"]
+            stats_dict["rapid"]["won"] = result["chess_rapid"]["record"]["win"]
+            stats_dict["rapid"]["lost"] = result["chess_rapid"]["record"]["loss"]
+            stats_dict["rapid"]["drawn"] = result["chess_rapid"]["record"]["draw"]
+            stats_dict["rapid"]["played"] = stats_dict["rapid"]["won"] + stats_dict["rapid"]["lost"] + stats_dict["rapid"]["drawn"]
+            stats_dict["rapid"]["pct-won"] = self.calc_pct(stats_dict["rapid"]["won"], stats_dict["rapid"]["played"])
+            stats_dict["rapid"]["pct-lost"] = self.calc_pct(stats_dict["rapid"]["lost"], stats_dict["rapid"]["played"])
+            stats_dict["rapid"]["pct-drawn"] = self.calc_pct(stats_dict["rapid"]["drawn"], stats_dict["rapid"]["played"])
+        except : #in the case the player has no rapid games
+            stats_dict["rapid"]["rating"], stats_dict["rapid"]["won"], stats_dict["rapid"]["lost"], stats_dict["rapid"]["drawn"], stats_dict["rapid"]["played"], stats_dict["rapid"]["pct-won"], stats_dict["rapid"]["pct-lost"], stats_dict["rapid"]["pct-drawn"] = 0, 0, 0, 0, 0, 0, 0, 0
+        try :
+            stats_dict["bullet"]["rating"] = result["chess_bullet"]["last"]["rating"]
+            stats_dict["bullet"]["won"] = result["chess_bullet"]["record"]["win"]
+            stats_dict["bullet"]["lost"] = result["chess_bullet"]["record"]["loss"]
+            stats_dict["bullet"]["drawn"] = result["chess_bullet"]["record"]["draw"]
+            stats_dict["bullet"]["played"] = stats_dict["bullet"]["won"] + stats_dict["bullet"]["lost"] + stats_dict["bullet"]["drawn"]
+            stats_dict["bullet"]["pct-won"] = self.calc_pct(stats_dict["bullet"]["won"], stats_dict["bullet"]["played"])
+            stats_dict["bullet"]["pct-lost"] = self.calc_pct(stats_dict["bullet"]["lost"], stats_dict["bullet"]["played"])
+            stats_dict["bullet"]["pct-drawn"] = self.calc_pct(stats_dict["bullet"]["drawn"], stats_dict["bullet"]["played"])
+        except : #in the case the player has no bullet games
+            stats_dict["bullet"]["rating"], stats_dict["bullet"]["won"], stats_dict["bullet"]["lost"], stats_dict["bullet"]["drawn"], stats_dict["bullet"]["played"], stats_dict["bullet"]["pct-won"], stats_dict["bullet"]["pct-lost"], stats_dict["bullet"]["pct-drawn"] = 0, 0, 0, 0, 0, 0, 0, 0
+        try :
+            stats_dict["blitz"]["rating"] = result["chess_blitz"]["last"]["rating"]
+            stats_dict["blitz"]["won"] = result["chess_blitz"]["record"]["win"]
+            stats_dict["blitz"]["lost"] = result["chess_blitz"]["record"]["loss"]
+            stats_dict["blitz"]["drawn"] = result["chess_blitz"]["record"]["draw"]
+            stats_dict["blitz"]["played"] = stats_dict["blitz"]["won"] + stats_dict["blitz"]["lost"] + stats_dict["blitz"]["drawn"]
+            stats_dict["blitz"]["pct-won"] = self.calc_pct(stats_dict["blitz"]["won"], stats_dict["blitz"]["played"])
+            stats_dict["blitz"]["pct-lost"] = self.calc_pct(stats_dict["blitz"]["lost"], stats_dict["blitz"]["played"])
+            stats_dict["blitz"]["pct-drawn"] = self.calc_pct(stats_dict["blitz"]["drawn"], stats_dict["blitz"]["played"])
+        except : #in the case the player has no blitz games
+            stats_dict["blitz"]["rating"], stats_dict["blitz"]["won"], stats_dict["blitz"]["lost"], stats_dict["blitz"]["drawn"], stats_dict["blitz"]["played"], stats_dict["blitz"]["pct-won"], stats_dict["blitz"]["pct-lost"], stats_dict["blitz"]["pct-drawn"] = 0, 0, 0, 0, 0, 0, 0, 0
         return stats_dict
     
     def retrieve_current_games(self) :
