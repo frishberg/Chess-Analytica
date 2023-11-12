@@ -10,7 +10,7 @@ with open(path.join(HERE, 'pypiREADME.rst'), encoding='utf-8') as f:
 
 setup(
     name="chess-analytica",
-    version="1.1.5",
+    version="1.1.6",
     description="Making chess analytics easy.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -39,5 +39,5 @@ setup(
     },
     packages=["chess_analytica"],
     include_package_data=True,
-    install_requires=["chess", "urllib3"]
+    install_requires=["chess", "urllib3", "python-chess"]
 )

@@ -441,6 +441,8 @@ class Profile :
             the printable table of the most frequent moves after the given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False)
         """
         moves, frequencies = self.find_moves_after_FEN(FEN, is_white)
+        if (moves == []) :
+            return "No games found with FEN: " + FEN
         s = ""
         for i in range(len(moves)) :
             s += (str(moves[i]) + ": " + str(frequencies[i])) + "\n"
@@ -463,6 +465,8 @@ class Profile :
             the most frequent move after the given FEN, where the player is white (if is_white bool is True) or black (if is_white bool is False)
         """
         moves, _ = self.find_moves_after_FEN(FEN, is_white)
+        if (moves == []) :
+            return "No games found with FEN: " + FEN
         return moves[0]
     
     def get_white_games(self) :

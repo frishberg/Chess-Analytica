@@ -9,8 +9,8 @@ Chess-Analytica: chess analytics made easy
     :target: https://pepy.tech/project/chess-analytica
     :alt: Downloads
 
-.. image:: https://readthedocs.org/projects/python-chess/badge/?version=latest
-    :target: https://python-chess.readthedocs.io/en/latest/
+.. image:: https://readthedocs.org/projects/chess-analytica/badge/?version=latest
+    :target: https://chess-analytica.readthedocs.io/en/latest/
     :alt: Docs
 
 .. image:: https://img.shields.io/pypi/l/chess-analytica
