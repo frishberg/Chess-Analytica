@@ -39,5 +39,5 @@ setup(
     },
     packages=["chess_analytica"],
     include_package_data=True,
-    install_requires=["chess", "urllib3", "python-chess"]
+    install_requires=["chess", "urllib3"]
 )
