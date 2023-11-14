@@ -14,8 +14,6 @@ Quick Start
 -----------
 Here's a glimpse of what you can do with Chess-Analytica:
 
-.. code-block:: python
-
     from chess_analytica import Board, ChessDotCom
 
     # Initialize and filter games
@@ -34,8 +32,6 @@ Here's a glimpse of what you can do with Chess-Analytica:
 Installation
 ------------
 Easily install Chess-Analytica using pip:
-
-.. code-block:: shell
 
     pip install chess-analytica
 
