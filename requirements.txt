@@ -1,2 +1,2 @@
-chess
+python-chess
 urllib3
