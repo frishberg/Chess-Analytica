@@ -10,7 +10,7 @@ with open(path.join(HERE, 'pypiREADME.rst'), encoding='utf-8') as f:
 
 setup(
     name="chess-analytica",
-    version="1.1.7",
+    version="1.1.8",
     description="Making chess analytics easy.",
     long_description=long_description,
     long_description_content_type="text/markdown",

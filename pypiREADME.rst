@@ -16,18 +16,22 @@ Here's a glimpse of what you can do with Chess-Analytica:
 
     from chess_analytica import Board, ChessDotCom
 
-    # Initialize and filter games
     profile = ChessDotCom.Profile("aronfrish", False)
+
     profile.filterGameType("rapid")
 
-    # Analyze game terminations
-    resignation_count = sum(1 for game in profile.games if "resignation" in game.termination)
-    print(f"Rapid games ended in resignation: {resignation_count}")
+    print(len(profile.games)) #720
 
-    # Analyze specific openings
-    italian_games = profile.find_games_with_FEN_and_Color("r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R", True)
-    italian_game_percentage = len(italian_games) / len(profile.white_games)
-    print(f"Italian games percentage (as white): {italian_game_percentage:.2%}")
+    n = 0
+    for game in profile.games : #Note: this is still filtered to rapid
+    if ("resignation" in game.termination) :
+        n += 1
+    print(n) #Note: this will print the number of the player's rapid games that ended in resignation
+    #334
+
+    italian_games = profile.find_games_with_FEN_and_Color("r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R", True) #Note: this FEN is the italian game and the target player color is white (because is_white is set to True)
+    print(len(italian_games)/len(profile.white_games)) #Note: this will print the percentage of rapid games (where the player is white) that the player has played the italian game
+    #0.013888888888888888
 
 Installation
 ------------

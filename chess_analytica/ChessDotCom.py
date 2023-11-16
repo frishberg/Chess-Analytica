@@ -446,7 +446,7 @@ class Profile :
         s = ""
         for i in range(len(moves)) :
             s += (str(moves[i]) + ": " + str(frequencies[i])) + "\n"
-        return s[-1]
+        return s[:-1]
     
     def most_common_move(self, FEN: str, is_white: bool) :
         """

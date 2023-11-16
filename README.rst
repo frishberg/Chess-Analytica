@@ -28,7 +28,7 @@ Introduction
 analysis of that data.  Built on top of the python-chess library, Chess-Analytica allows for you to easily scrape 
 all of a given player's past (or current) games, filter the games down, and then analyze them.
 
-.. code:: python
+..
 
     from chess_analytica import Board, ChessDotCom
 
