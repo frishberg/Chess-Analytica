@@ -10,7 +10,7 @@ with open(path.join(HERE, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name="chess-analytica",
-    version="1.1.8",
+    version="1.1.9",
     description="Making chess analytics easy.",
     long_description=long_description,
     long_description_content_type="text/markdown",
