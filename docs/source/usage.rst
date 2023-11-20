@@ -41,7 +41,7 @@ There is also a filter option implemented into this library, that can be used as
 
    profile = ChessDotCom.Profile("aronfrish", False)
 
-   profile.filterGameType("rapid")
+   profile.filter_game_type("rapid")
 
    print(len(profile.games)) #720
 
@@ -68,10 +68,10 @@ This library also includes many analytical methods, such as ``mostCommonMove()``
 
    profile = ChessDotCom.Profile("aronfrish", False)
 
-   print(profile.mostCommonMove("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", True)) #Note: given this FEN, which is the four knights opening, and setting "white" to True (meaning that we'll be looking at all of the times the given player has been white in this position), it will tell us their most common move
+   print(profile.most_common_move("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", True)) #Note: given this FEN, which is the four knights opening, and setting "white" to True (meaning that we'll be looking at all of the times the given player has been white in this position), it will tell us their most common move
    #c3d5
 
-   print(profile.moveTable("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", True)) #Note: using the same parameters as above, but this produces a visual table containing all of their moves in the given position and their frequencies (in descending order to show most popular first)
+   print(profile.move_table("r1bqkb1r/pppp1ppp/2n2n2/4p3/4P3/2N2N2/PPPP1PPP/R1BQKB1R", True)) #Note: using the same parameters as above, but this produces a visual table containing all of their moves in the given position and their frequencies (in descending order to show most popular first)
 
    # c3d5: 27
    # f1d3: 16
