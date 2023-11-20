@@ -21,6 +21,10 @@ Chess-Analytica: chess analytics made easy
     :target: https://pypi.org/project/chess-analytica/
     :alt: Status
 
+.. image:: https://github.com/AronFrish/Chess-Analytica/actions/workflows/test.yml/badge.svg
+    :target: https://github.com/AronFrish/Chess-Analytica/actions/workflows/test.yml
+    :alt: Tests
+
 Introduction
 ------------
 
