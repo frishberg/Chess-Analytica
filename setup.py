@@ -7,7 +7,7 @@ HERE = path.abspath(path.dirname(__file__))
 
 setup(
     name="chess-analytica",
-    version="1.2.2",
+    version="1.2.4",
     description="Making chess analytics easy.",
     long_description=open('README.rst').read(),
     long_description_content_type='text/x-rst',

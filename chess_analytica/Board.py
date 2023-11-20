@@ -1,7 +1,7 @@
 import chess.pgn
 import io
 
-def __retrieve_info(PGN: str) :
+def retrieve_info(PGN: str) :
     """
     Function that takes in the PGN (in the format provided by the Chess.com API) and extracts info about the game including the date, white player, black elo, time control, etc...
 
@@ -56,10 +56,10 @@ def __retrieve_info(PGN: str) :
     end_time = PGN[:PGN.index('"')]
     PGN = PGN[PGN.index("Link")+6:]
     link = PGN[:PGN.index('"')]
-    time_length = __calculate_time_length(start_time, end_time)
+    time_length = calculate_time_length(start_time, end_time)
     return date, white_player, black_player, white_elo, black_elo, time_control, termination, start_time, end_time, link, time_length
 
-def __calculate_time_length(start_time: str, end_time: str) :
+def calculate_time_length(start_time: str, end_time: str) :
     """
     Function that takes in the start time and end time of a game and calculates the length of the game in seconds
 
@@ -82,7 +82,7 @@ def __calculate_time_length(start_time: str, end_time: str) :
     time_length = (end_time[0]-start_time[0])*3600 + (end_time[1]-start_time[1])*60 + (end_time[2]-start_time[2])
     return time_length
 
-def __extract_winner(termination) :
+def extract_winner(termination) :
     if "Game drawn" in termination :
         return "draw"
     return termination[:termination.index(" ")]
@@ -153,6 +153,8 @@ class Board :
         Simulates the board through all moves, checking after each move is made to see if the current FEN of the board matches the given FEN.  If it does, the method returns True.  Otherwise, it returns False.  This method is used to check if the state of the game ever matches a given FEN.
     get_next_move()
         Returns the next move in the game
+    get_final_state()
+        Returns a visual representation of the final state of the board, after all moves have been made
     """
 
     def __init__(self, PGN: str) :
@@ -161,13 +163,13 @@ class Board :
         including the board object, PGN, date, white player, black elo, time control, etc... (all of which can be retrieved)
         """
         self.PGN = PGN #storing original PGN
-        self.date, self.white_player, self.black_player, self.white_elo, self.black_elo, self.time_control, self.termination, self.start_time, self.end_time, self.link, self.time_length = __retrieve_info(PGN)
+        self.date, self.white_player, self.black_player, self.white_elo, self.black_elo, self.time_control, self.termination, self.start_time, self.end_time, self.link, self.time_length = retrieve_info(PGN)
         self.__pgn = io.StringIO(PGN) #converting to be usable by chess.pgn
         self.game = chess.pgn.read_game(self.__pgn) #creating game object
         self.board = self.game.board() #creating board object
         self.moves_left = list(self.game.mainline_moves()) #moves left in the game (length will be reduced as move method is called, but can be reset with reset method)
-        self.final_state = self.__get_final_state() #visual representation of the final state of the board, after all moves have been made
-        self.winner = __extract_winner(self.termination) #winner of the game (ex. aronfrish or draw)
+        self.final_state = self.get_final_state() #visual representation of the final state of the board, after all moves have been made
+        self.winner = extract_winner(self.termination) #winner of the game (ex. aronfrish or draw)
 
     def __str__(self) :
         """
@@ -237,7 +239,7 @@ class Board :
         """
         return self.moves_left[0]
     
-    def __get_final_state(self) :
+    def get_final_state(self) :
         """
         Returns a visual representation of the final state of the board, after all moves have been made 
         """
