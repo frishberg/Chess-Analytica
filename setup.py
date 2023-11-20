@@ -5,15 +5,12 @@ from os import path
 
 HERE = path.abspath(path.dirname(__file__))
 
-with open(path.join(HERE, 'README.rst'), encoding='utf-8') as f:
-    long_description = f.read()
-
 setup(
     name="chess-analytica",
     version="1.1.9",
     description="Making chess analytics easy.",
-    long_description=long_description,
-    long_description_content_type="text/markdown",
+    long_description=open('README.rst').read(),
+    long_description_content_type='text/x-rst',
     url="https://github.com/AronFrish/Chess-Analytica",
     author="Aron Frishberg",
     author_email="frishberg@uchicago.edu",

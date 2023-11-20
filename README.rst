@@ -1,6 +1,8 @@
 Chess-Analytica: chess analytics made easy
 ================================================================================
 
+![](https://raw.githubusercontent.com/greyli/flask-share/master/images/demo.png)
+
 .. image:: https://img.shields.io/pypi/v/chess-analytica
     :target: https://pypi.org/project/chess-analytica/
     :alt: PyPI
