@@ -1,7 +1,7 @@
 import urllib.request
 import json
 import os
-from Board import Board
+from .Board import Board
 
 def __import_json_from_url(url: str) :
     """
